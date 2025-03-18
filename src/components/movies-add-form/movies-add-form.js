@@ -1,12 +1,14 @@
+import { Context } from "../../context";
 import "./movies-add-form.css";
-import { Component, useState } from "react";
+import { Component, useContext, useState } from "react";
 
-const AddMovies = ({ onAdd }) => {
+const AddMovies = () => {
   const [name, setName] = useState("");
   const [viewers, setViewers] = useState("");
+  const { _, dispatch } = useContext(Context);
   const onAddhandler = (e) => {
     e.preventDefault();
-    onAdd(name, viewers);
+    dispatch({ type: "ADD_FORM", payload: { name, viewers } });
     setName("");
     setViewers("");
   };

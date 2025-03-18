@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import "./app-filter.css";
-const AppFilter = (props) => {
+import { Context } from "../../context";
+const AppFilter = () => {
+  const { state, dispatch } = useContext(Context);
   const onButtonClick = (name) => {
-    props.filterInputHandler(name);
+    dispatch({ type: "ON_FILTER", payload: name });
   };
   const btnArray = [
     { id: 1, name: "all", label: "Barcha kinolar" },
@@ -14,7 +17,7 @@ const AppFilter = (props) => {
         return (
           <button
             key={btn.id}
-            className={`btn ${props.filter === btn.name ? "btn-dark" : ""} `}
+            className={`btn ${state.filter === btn.name ? "btn-dark" : ""} `}
             type="button"
             onClick={() => onButtonClick(btn.name)}
           >

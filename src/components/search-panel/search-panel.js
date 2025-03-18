@@ -1,9 +1,12 @@
+import { useContext } from "react";
 import "./search-panel.css";
+import { Context } from "../../context";
 
 const SearchPanel = (props) => {
+  const { _, dispatch } = useContext(Context);
   const onChangeInput = (e) => {
     const search = e.target.value.toLowerCase();
-    props.searchInputHandler(search);
+    dispatch({ type: "ON_TERM", payload: search });
   };
   return (
     <input

@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./movie-list-item.css";
+import { Context } from "../../context";
+import { type } from "@testing-library/user-event/dist/type";
 
 const MovieListItem = (props) => {
-  const { name, viewers, onDelete, onToggleValue, islike, increase } = props;
+  const { name, viewers, islike, increase, id } = props;
+
+  const { _, dispatch } = useContext(Context);
+
+  const onDelete = () => {
+    dispatch({ type: "ON_DELETE", payload: id });
+  };
+  const onToggleValue = (e) => {
+    const payload = {
+      id,
+      prop: e.currentTarget.getAttribute("data-toggle"),
+    };
+    dispatch({ type: "ON_TOGGLE_PROP", payload });
+  };
+
   return (
     <li
       className={`list-group-item d-flex justify-content-between ${
